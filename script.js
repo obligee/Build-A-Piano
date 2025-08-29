@@ -39,3 +39,52 @@ document.addEventListener('keydown', (e) => {
     playNote(blackKeys[blackKeyIndex]);
   }
 });
+//melody represented by an array of objects
+const marioTheme = [
+  //opening “da-da-da-da” 
+  { key: 'E', duration: 150 },
+  { key: 'E', duration: 150 },
+  { key: 'E', duration: 150 },
+  { key: 'C', duration: 150 },
+  { key: 'E', duration: 150 },
+  { key: 'G', duration: 300 },
+  { key: 'G', duration: 300 },
+
+  { key: 'C', duration: 150 },
+  { key: 'G', duration: 150 },
+  { key: 'E', duration: 150 },
+  { key: 'A', duration: 150 },
+  { key: 'B', duration: 300 },
+  { key: 'Bb', duration: 150 },
+  { key: 'A', duration: 150 },
+  { key: 'G', duration: 300 },
+
+  { key: 'E', duration: 150 },
+  { key: 'G', duration: 150 },
+  { key: 'A', duration: 150 },
+  { key: 'F', duration: 150 },
+  { key: 'G', duration: 300 },
+  { key: 'E', duration: 150 },
+  { key: 'C', duration: 150 },
+  { key: 'D', duration: 150 },
+  { key: 'B', duration: 400 },
+
+];
+function playSong(song) {
+  let delay = 0;
+
+  song.forEach(note => {
+    setTimeout(() => {
+      const keyElement = document.querySelector(`[data-note="${note.key}"]`);
+      if (keyElement) {
+        playNote(keyElement);
+      }
+    }, delay);
+    delay += note.duration;
+  });
+  
+}
+// Hook the button to play the song
+document.getElementById('mario-btn').addEventListener('click', () => {
+  playSong(marioTheme);
+});
